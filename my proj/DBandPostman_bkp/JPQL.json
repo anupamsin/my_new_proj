@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "442bf8c5-4435-42e7-a94c-e8b8c9e1e19b",
+		"_postman_id": "d12363ac-4682-429f-af54-e79f5e28cd24",
 		"name": "Product",
+		"description": "Product CRUD Operations",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "14499276"
+		"_exporter_id": "29373154"
 	},
 	"item": [
 		{
@@ -12,52 +13,301 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/product/home",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/home",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"home"
 					]
-				}
+				},
+				"description": "``` json\nWelcome To Home Page\n\n ```"
 			},
 			"response": []
 		},
 		{
 			"name": "GetProductDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Product ID</th>\r",
+							"        <th>Product Name</th>\r",
+							"        <th>Product Description</th>\r",
+							"        <th>Product Category</th>\r",
+							"        <th>Product Created Date</th>\r",
+							"        <th>Product Price</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response.Data}}\r",
+							"        <tr>\r",
+							"            <td>{{@key}}</td>\r",
+							"            <td>{{productId}}</td>\r",
+							"            <td>{{productName}}</td>\r",
+							"            <td>{{productDescription}}</td>\r",
+							"            <td>{{productCategory}}</td>\r",
+							"            <td>{{productCreatedDate}}</td>\r",
+							"            <td>{{productPrice}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    var res = pm.response.json();\r",
+							"\r",
+							"    return { response: res };\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/product/getProducts",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/getProducts",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"getProducts"
 					]
+				},
+				"description": "``` json\n{\n    \"Data : \": {\n        \"1\": {\n            \"productId\": 1,\n            \"productName\": \"Rice 25KG\",\n            \"productDescription\": \"Fully Grained Basmati Rice\",\n            \"productCategory\": \"GROCERY\",\n            \"productCreatedDate\": \"2023-08-24\",\n            \"productPrice\": 1000.0\n        },\n        \"2\": {\n            \"productId\": 2,\n            \"productName\": \"Galaxy s23 Ultra\",\n            \"productDescription\": \"Samsung Mobile Flagship\",\n            \"productCategory\": \"ELECTRONICS\",\n            \"productCreatedDate\": \"2023-08-20\",\n            \"productPrice\": 110000.0\n        },\n        \"3\": {\n            \"productId\": 3,\n            \"productName\": \"HarryPotter\",\n            \"productDescription\": \"HarryPotter\",\n            \"productCategory\": \"BOOKS\",\n            \"productCreatedDate\": \"2023-08-29\",\n            \"productPrice\": 110.0\n        },\n        \"4\": {\n            \"productId\": 4,\n            \"productName\": \"Jeans\",\n            \"productDescription\": \"jeans\",\n            \"productCategory\": \"MEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-27\",\n            \"productPrice\": 410.0\n        },\n        \"6\": {\n            \"productId\": 6,\n            \"productName\": \"Leggings\",\n            \"productDescription\": \"leggings\",\n            \"productCategory\": \"WOMEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-30\",\n            \"productPrice\": 430.0\n        },\n        \"8\": {\n            \"productId\": 8,\n            \"productName\": \"AssassinCreed\",\n            \"productDescription\": \"assassin\",\n            \"productCategory\": \"BOOKS\",\n            \"productCreatedDate\": \"2023-08-31\",\n            \"productPrice\": 250.0\n        },\n        \"9\": {\n            \"productId\": 9,\n            \"productName\": \"Frocks\",\n            \"productDescription\": \"Frocks\",\n            \"productCategory\": \"WOMEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-31\",\n            \"productPrice\": 1030.0\n        },\n        \"10\": {\n            \"productId\": 10,\n            \"productName\": \"t-shirts\",\n            \"productDescription\": \"shirts\",\n            \"productCategory\": \"MEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-31\",\n            \"productPrice\": 785.0\n        }\n    },\n    \"Message : \": \"Product Details\",\n    \"Status : \": 200\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "filterByName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Product ID</th>\r",
+							"        <th>Product Name</th>\r",
+							"        <th>Product Description</th>\r",
+							"        <th>Product Category</th>\r",
+							"        <th>Product Created Date</th>\r",
+							"        <th>Product Price</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response.Data}}\r",
+							"        <tr>\r",
+							"            <td>{{@key}}</td>\r",
+							"            <td>{{productId}}</td>\r",
+							"            <td>{{productName}}</td>\r",
+							"            <td>{{productDescription}}</td>\r",
+							"            <td>{{productCategory}}</td>\r",
+							"            <td>{{productCreatedDate}}</td>\r",
+							"            <td>{{productPrice}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    var res = pm.response.json();\r",
+							"\r",
+							"    return { response: res };\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
 				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/product/filterByName?productName=50k",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product",
+						"filterByName"
+					],
+					"query": [
+						{
+							"key": "productName",
+							"value": "50k"
+						}
+					]
+				},
+				"description": "``` json\n{\n    \"Data : \": {\n        \"4\": {\n            \"productId\": 4,\n            \"productName\": \"Jeans\",\n            \"productDescription\": \"jeans\",\n            \"productCategory\": \"MEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-27\",\n            \"productPrice\": 410.0\n        }\n    },\n    \"Message : \": \"Product Details With Product Name Consist of : jeans\",\n    \"Status : \": 200\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductDetailsByDateRange",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Product ID</th>\r",
+							"        <th>Product Name</th>\r",
+							"        <th>Product Description</th>\r",
+							"        <th>Product Category</th>\r",
+							"        <th>Product Created Date</th>\r",
+							"        <th>Product Price</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response.Data}}\r",
+							"        <tr>\r",
+							"            <td>{{@key}}</td>\r",
+							"            <td>{{productId}}</td>\r",
+							"            <td>{{productName}}</td>\r",
+							"            <td>{{productDescription}}</td>\r",
+							"            <td>{{productCategory}}</td>\r",
+							"            <td>{{productCreatedDate}}</td>\r",
+							"            <td>{{productPrice}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    var res = pm.response.json();\r",
+							"\r",
+							"    return { response: res };\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/product/productsByDateRange?toDate=30/08/2023&fromDate=24/08/2023",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product",
+						"productsByDateRange"
+					],
+					"query": [
+						{
+							"key": "toDate",
+							"value": "30/08/2023"
+						},
+						{
+							"key": "fromDate",
+							"value": "24/08/2023"
+						}
+					]
+				},
+				"description": "``` json\n{\n    \"Data : \": {\n        \"1\": {\n            \"productId\": 1,\n            \"productName\": \"Rice 25KG\",\n            \"productDescription\": \"Fully Grained Basmati Rice\",\n            \"productCategory\": \"GROCERY\",\n            \"productCreatedDate\": \"2023-08-24\",\n            \"productPrice\": 1000.0\n        },\n        \"3\": {\n            \"productId\": 3,\n            \"productName\": \"HarryPotter\",\n            \"productDescription\": \"HarryPotter\",\n            \"productCategory\": \"BOOKS\",\n            \"productCreatedDate\": \"2023-08-29\",\n            \"productPrice\": 110.0\n        },\n        \"4\": {\n            \"productId\": 4,\n            \"productName\": \"Jeans\",\n            \"productDescription\": \"jeans\",\n            \"productCategory\": \"MEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-27\",\n            \"productPrice\": 410.0\n        },\n        \"6\": {\n            \"productId\": 6,\n            \"productName\": \"Leggings\",\n            \"productDescription\": \"leggings\",\n            \"productCategory\": \"WOMEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-30\",\n            \"productPrice\": 430.0\n        }\n    },\n    \"Message : \": \"Product Details By Date Range\",\n    \"Status : \": 200\n}\n\n ```"
 			},
 			"response": []
 		},
 		{
 			"name": "GetProductByCategory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Product ID</th>\r",
+							"        <th>Product Name</th>\r",
+							"        <th>Product Description</th>\r",
+							"        <th>Product Category</th>\r",
+							"        <th>Product Created Date</th>\r",
+							"        <th>Product Price</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response.Data}}\r",
+							"        <tr>\r",
+							"            <td>{{@key}}</td>\r",
+							"            <td>{{this.productName}}</td>\r",
+							"            <td>{{this.productDescription}}</td>\r",
+							"            <td>{{this.productCategory}}</td>\r",
+							"            <td>{{this.productCreatedDate}}</td>\r",
+							"            <td>{{this.productPrice}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    var res = pm.response.json();\r",
+							"\r",
+							"    return { response: res }\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/product/getProductByCategory?category=BOOKS",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/getProductByCategory?category=BOOKS&category=MEN_FASHION&category=MEN_FASHION",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"getProductByCategory"
@@ -76,24 +326,76 @@
 						{
 							"key": "category",
 							"value": "BOOKS"
+						},
+						{
+							"key": "category",
+							"value": "MEN_FASHION"
+						},
+						{
+							"key": "category",
+							"value": "MEN_FASHION"
 						}
 					]
-				}
+				},
+				"description": "``` json\n{\n    \"Data : \": {\n        \"3\": {\n            \"productId\": 3,\n            \"productName\": \"HarryPotter\",\n            \"productDescription\": \"HarryPotter\",\n            \"productCategory\": \"BOOKS\",\n            \"productCreatedDate\": \"2023-08-29\",\n            \"productPrice\": 110.0\n        },\n        \"8\": {\n            \"productId\": 8,\n            \"productName\": \"AssassinCreed\",\n            \"productDescription\": \"assassin\",\n            \"productCategory\": \"BOOKS\",\n            \"productCreatedDate\": \"2023-08-31\",\n            \"productPrice\": 250.0\n        }\n    },\n    \"Message : \": \"Product By Category : BOOKS\",\n    \"Status : \": 200\n}\n\n ```"
 			},
 			"response": []
 		},
 		{
 			"name": "getProductById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Product ID</th>\r",
+							"        <th>Product Name</th>\r",
+							"        <th>Product Description</th>\r",
+							"        <th>Product Category</th>\r",
+							"        <th>Product Created Date</th>\r",
+							"        <th>Product Price</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>{{response.Data.productId}}</td>\r",
+							"        <td>{{response.Data.productName}}</td>\r",
+							"        <td>{{response.Data.productDescription}}</td>\r",
+							"        <td>{{response.Data.productCategory}}</td>\r",
+							"        <td>{{response.Data.productCreatedDate}}</td>\r",
+							"        <td>{{response.Data.productPrice}}</td>\r",
+							"    </tr>\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return { response: pm.response.json() }\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/product/getProductById/1",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/getProductById/1",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"getProductById",
@@ -111,22 +413,21 @@
 							"disabled": true
 						}
 					]
-				}
+				},
+				"description": "``` json\n{\n    \"Data : \": {\n        \"productId\": 1,\n        \"productName\": \"Rice 25KG\",\n        \"productDescription\": \"Fully Grained Basmati Rice\",\n        \"productCategory\": \"GROCERY\",\n        \"productCreatedDate\": \"2023-08-24\",\n        \"productPrice\": 1000.0\n    },\n    \"Message : \": \"Product By Product Id : 1\",\n    \"Status : \": 200\n}\n\n ```"
 			},
 			"response": []
 		},
 		{
-			"name": "deletProductById",
+			"name": "deleteProductById",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/product/deleteProduct/11",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/deleteProduct/11",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"deleteProduct",
@@ -139,7 +440,8 @@
 							"disabled": true
 						}
 					]
-				}
+				},
+				"description": "``` json\n{\n    \"Data : \": \"Product deleted successfully\",\n    \"Message : \": \"Product Deletion\",\n    \"Status : \": 200\n}\n\n ```"
 			},
 			"response": []
 		},
@@ -150,7 +452,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"productId\": 1,\r\n    \"productName\": \"Rice 50 Kg\",\r\n    \"productDescription\": \"Fully Grained Basmati Rice\",\r\n    \"productCategory\": \"GROCERY\",\r\n    \"productCreatedDate\": \"2023-08-26T10:52:53.456+00:00\",\r\n    \"productPrice\": 1200.0\r\n}",
+					"raw": "{\r\n    \"productName\": \"Rice 50Kg\",\r\n    \"productDescription\": \"Fully Grained Basmati Rice\",\r\n    \"productCategory\": \"GROCERY\",\r\n    \"productPrice\": 1200.0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -158,12 +460,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/product/updateProduct?productId=1",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/updateProduct?productId=1",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"updateProduct"
@@ -179,36 +479,148 @@
 							"value": "1"
 						}
 					]
-				}
+				},
+				"description": "``` json\n{\n    \"Data : \": \"Updated Successfully : 1, Rice 50Kg, Fully Grained Basmati Rice, GROCERY, null, 1200.0\",\n    \"Message : \": \"Product Updated With Product Id : 1\",\n    \"Status : \": 200\n}\n\n ```"
 			},
 			"response": []
 		},
 		{
 			"name": "/sortByPriceAndCat/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Product ID</th>\r",
+							"        <th>Product Name</th>\r",
+							"        <th>Product Description</th>\r",
+							"        <th>Product Category</th>\r",
+							"        <th>Product Created Date</th>\r",
+							"        <th>Product Price</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    {{#each response.Data}}\r",
+							"        <tr>\r",
+							"            <td>{{@key}}</td>\r",
+							"            <td>{{productName}}</td>\r",
+							"            <td>{{productDescription}}</td>\r",
+							"            <td>{{productCategory}}</td>\r",
+							"            <td>{{productCreatedDate}}</td>\r",
+							"            <td>{{productPrice}}</td>\r",
+							"        </tr>\r",
+							"    {{/each}}\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    var res = pm.response.json();\r",
+							"\r",
+							"    return { response: res }\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/product/sortByPriceAndCat/asc?category=MEN_FASHION",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/sortBy/dsc/date",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
-						"sortByPriceAndCat",
-						"asc"
+						"sortBy",
+						"dsc",
+						"date"
 					],
 					"query": [
 						{
 							"key": "category",
-							"value": "MEN_FASHION"
+							"value": "MEN_FASHION",
+							"disabled": true
 						}
 					]
-				}
+				},
+				"description": "``` json\n{\n    \"Data : \": {\n        \"1\": {\n            \"productId\": 1,\n            \"productName\": \"Rice 25KG\",\n            \"productDescription\": \"Fully Grained Basmati Rice\",\n            \"productCategory\": \"GROCERY\",\n            \"productCreatedDate\": \"2023-08-24\",\n            \"productPrice\": 1000.0\n        },\n        \"3\": {\n            \"productId\": 3,\n            \"productName\": \"HarryPotter\",\n            \"productDescription\": \"HarryPotter\",\n            \"productCategory\": \"BOOKS\",\n            \"productCreatedDate\": \"2023-08-29\",\n            \"productPrice\": 110.0\n        },\n        \"4\": {\n            \"productId\": 4,\n            \"productName\": \"Jeans\",\n            \"productDescription\": \"jeans\",\n            \"productCategory\": \"MEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-27\",\n            \"productPrice\": 410.0\n        },\n        \"6\": {\n            \"productId\": 6,\n            \"productName\": \"Leggings\",\n            \"productDescription\": \"leggings\",\n            \"productCategory\": \"WOMEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-30\",\n            \"productPrice\": 430.0\n        }\n    },\n    \"Message : \": \"Product Details By Date Range\",\n    \"Status : \": 200\n}\n\n ```"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "/sortByPriceAndCat/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product/sortBy/asc/date",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"sortBy",
+								"asc",
+								"date"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "MEN_FASHION",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "/sortByPriceAndCat/",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product/sortBy/dsc/price",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"sortBy",
+								"dsc",
+								"price"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "MEN_FASHION",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "CreateProduct",
@@ -217,7 +629,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"productName\":\"Rice 50 Kg\",\r\n    \"productDescription\":\"Fully Grained Basmati Rice\",\r\n    \"productCategory\":\"GROCERY\"\r\n}",
+					"raw": "{\r\n    \"productName\":\"Frocks\",\r\n    \"productDescription\":\"Frocks\",\r\n    \"productCategory\":\"WOMEN_FASHION\",\r\n    \"productPrice\":1030\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -225,17 +637,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/product/createProduct",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/createProduct",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"createProduct"
 					]
-				}
+				},
+				"description": "``` json\n{\n    \"Data : \": \"Product Already Exist, Product Details : Product{productId=9, productName='Frocks', productDescription='Frocks', productCategory=WOMEN_FASHION, productCreatedDate=2023-08-31, productPrice=1030.0}\",\n    \"Message : \": \"Product Not Created\",\n    \"Status : \": 303\n}\n\n ```"
 			},
 			"response": []
 		},
@@ -245,12 +656,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/product/multiCategory?category=GROCERY&category=ELECTRONICS",
-					"protocol": "http",
+					"raw": "{{base_url}}/product/multiCategory?category=grocery&category=women_fashion",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"product",
 						"multiCategory"
@@ -258,14 +667,30 @@
 					"query": [
 						{
 							"key": "category",
-							"value": "GROCERY"
+							"value": "grocery"
 						},
 						{
 							"key": "category",
-							"value": "ELECTRONICS"
+							"value": "electronics",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "men_fashion",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "books",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "women_fashion"
 						}
 					]
-				}
+				},
+				"description": "``` json\n{\n    \"Data : \": {\n        \"1\": {\n            \"productId\": 1,\n            \"productName\": \"Rice 50Kg\",\n            \"productDescription\": \"Fully Grained Basmati Rice\",\n            \"productCategory\": \"GROCERY\",\n            \"productCreatedDate\": null,\n            \"productPrice\": 1200.0\n        },\n        \"6\": {\n            \"productId\": 6,\n            \"productName\": \"Leggings\",\n            \"productDescription\": \"leggings\",\n            \"productCategory\": \"WOMEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-30\",\n            \"productPrice\": 430.0\n        },\n        \"9\": {\n            \"productId\": 9,\n            \"productName\": \"Frocks\",\n            \"productDescription\": \"Frocks\",\n            \"productCategory\": \"WOMEN_FASHION\",\n            \"productCreatedDate\": \"2023-08-31\",\n            \"productPrice\": 1030.0\n        }\n    },\n    \"Message : \": \"Product By Category : [grocery, women_fashion]\",\n    \"Status : \": 200\n}\n\n ```"
 			},
 			"response": []
 		}

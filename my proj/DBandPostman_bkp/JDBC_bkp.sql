@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: jpql_db
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
-  `product_id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_category` varchar(255) DEFAULT NULL,
-  `product_created_date` datetime(6) DEFAULT NULL,
+  `product_created_date` date DEFAULT NULL,
   `product_description` varchar(255) DEFAULT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `product_price` double NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'GROCERY','2023-08-26 16:22:53.456000','Fully Grained Basmati Rice','Rice 50 Kg',1200),(2,'GROCERY','2023-08-26 16:24:51.240000','Fresh Chakki Aata','Wheat 20 Kg',700),(3,'ELECTRONICS','2023-08-26 16:25:49.657000','Samsung top of the line Galaxy S series Model','Samsung S23 Ultra',110000),(4,'BOOKS','2023-08-26 16:26:48.438000','Harry Potter Series','Harry Potter : Prisoner of Azkaban',350),(5,'BOOKS','2023-08-26 16:27:58.296000','Creed of Assassins','Assassin Creed',320),(6,'MEN_FASHION','2023-08-26 16:29:09.127000','Hoodie with different size','Hoodie X XL M L',798),(7,'MEN_FASHION','2023-08-26 16:29:35.645000','Jeans with different size','Jeans X XL M L',899),(8,'MEN_FASHION','2023-08-26 16:29:58.725000','Shirts with different size','Shirt X XL M L',645),(9,'WOMEN_FASHION','2023-08-26 16:31:26.938000','Kurtas with different size','Kurta X XL M L',1045),(10,'WOMEN_FASHION','2023-08-26 16:31:54.108000','Piecses with different size','One Piece X XL M L',1021),(12,'WOMEN_FASHION','2023-08-26 20:21:41.357000','Leggings with different size','Leggings X XL M L',449);
+INSERT INTO `product` VALUES (1,'GROCERY','2023-08-19','Fully Grained Basmati Rice','Rice 50Kg',1200),(2,'ELECTRONICS','2023-08-20','Samsung Mobile Flagship','Galaxy s23 Ultra',110000),(3,'BOOKS','2023-08-29','HarryPotter','HarryPotter',110),(4,'MEN_FASHION','2023-08-27','jeans','Jeans',410),(6,'WOMEN_FASHION','2023-08-30','leggings','Leggings',430),(8,'BOOKS','2023-08-31','assassin','AssassinCreed',250),(9,'WOMEN_FASHION','2023-08-31','Frocks','Frocks',1030),(10,'MEN_FASHION','2023-08-31','shirts','t-shirts',785);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-27 17:11:03
+-- Dump completed on 2023-09-02 23:17:47
