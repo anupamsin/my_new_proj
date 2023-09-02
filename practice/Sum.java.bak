@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+class Sum{
+	public static void main(String[] args){
+		Scanner scanner=new Scanner(System.in);
+		System.out.println("Enter two number to swap them without third variable");
+		int num1=scanner.nextInt();
+		int num2=scanner.nextInt();
+		System.out.println("Original Value : num1= "+num1+", num2= "+num2);
+		
+		// swap logic
+		num1=num1+num2;
+		num2=num1-num2;
+		num1=num1-num2;
+		
+		System.out.println("Value after Swap : num1= "+num1+", num2= "+num2);
+	}
+}
