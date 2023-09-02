@@ -1,7 +1,7 @@
 package com.cybage.model;
 
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +29,7 @@ public class Product {
 
     //@Temporal(TemporalType.TIMESTAMP) its for java.util.Time
     @Column(name = "product_created_date")
-    private Timestamp productCreatedDate;
+    private LocalDate productCreatedDate;
     @Column(name = "product_price")
     private double productPrice;
 
@@ -68,11 +68,11 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Timestamp getProductCreatedDate() {
+    public LocalDate getProductCreatedDate() {
         return productCreatedDate;
     }
 
-    public void setProductCreatedDate(Timestamp productCreatedDate) {
+    public void setProductCreatedDate(LocalDate productCreatedDate) {
         this.productCreatedDate = productCreatedDate;
     }
 

@@ -1,5 +1,11 @@
 package com.cybage.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.cybage.model.Category;
 import com.cybage.model.Product;
 import com.cybage.repo.ProductDao;
 import com.cybage.repo.ProductDaoImpl;
@@ -7,8 +13,8 @@ import com.cybage.repo.ProductDaoImpl;
 public class ProductService {
 	 ProductDao dao = new ProductDaoImpl();
 	 
-	 public void allProductDetails(){
-		 dao.getAllEmployee().forEach(System.out::println); 
+	 public List<Product> allProductDetails(){
+		 return dao.getAllEmployee();
 	 }
 	 
 	 public void addProduct(Product product) {
@@ -29,6 +35,7 @@ public class ProductService {
 	}
 
 	public String updateProduct(Product product) {
+
 		Product product2=new Product();
 		product2.setProductId(product.getProductId());
 		product2.setProductName(product.getProductName());
@@ -37,5 +44,21 @@ public class ProductService {
 		product2.setProductCategory(product.getProductCategory());
 		product2.setProductCreatedDate(product.getProductCreatedDate());
 		return dao.updateProductById(product2);
+	}
+
+	public List<Product> findProdByCategory(List<String> list) {
+		List<Product> prodList=new ArrayList<>();
+		for(String str : list) {
+			prodList.addAll(dao.getAllEmployee().stream().filter(p->p.getProductCategory().equals(Category.valueOf(str.toUpperCase()))).collect(Collectors.toList()));
+		}
+		return prodList;
+	}
+
+	public List<Product> filterProductByDate(LocalDate fromDate, LocalDate toDate) {		
+		return dao.getFilterProdByDate(fromDate,toDate);
+	}
+
+	public List<Product> productsByCategory(Category category) {
+		return dao.getProductByCategory(category);		
 	}
 }
