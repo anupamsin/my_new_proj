@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "442bf8c5-4435-42e7-a94c-e8b8c9e1e19b",
+		"name": "Product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14499276"
+	},
+	"item": [
+		{
+			"name": "Home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/home",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"home"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/getProducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"getProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductByCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/getProductByCategory?category=BOOKS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"getProductByCategory"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "GROCERY",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "ELECTRONICS",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "BOOKS"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/getProductById/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"getProductById",
+						"1"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "category",
+							"value": "ELECTRONICS",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletProductById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/deleteProduct/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"deleteProduct",
+						"11"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "ELECTRONICS",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductUpdateById",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 1,\r\n    \"productName\": \"Rice 50 Kg\",\r\n    \"productDescription\": \"Fully Grained Basmati Rice\",\r\n    \"productCategory\": \"GROCERY\",\r\n    \"productCreatedDate\": \"2023-08-26T10:52:53.456+00:00\",\r\n    \"productPrice\": 1200.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/product/updateProduct?productId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"updateProduct"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "ELECTRONICS",
+							"disabled": true
+						},
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/sortByPriceAndCat/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/sortByPriceAndCat/asc?category=MEN_FASHION",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"sortByPriceAndCat",
+						"asc"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "MEN_FASHION"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\":\"Rice 50 Kg\",\r\n    \"productDescription\":\"Fully Grained Basmati Rice\",\r\n    \"productCategory\":\"GROCERY\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/product/createProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"createProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "multiCat",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/multiCategory?category=GROCERY&category=ELECTRONICS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"multiCategory"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "GROCERY"
+						},
+						{
+							"key": "category",
+							"value": "ELECTRONICS"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
