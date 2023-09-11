@@ -1,7 +1,12 @@
 package com.laptopstore.exception;
 
 public class InvalidDataException extends RuntimeException{
-    public InvalidDataException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public InvalidDataException(String message) {
         super(message);
     }
 }

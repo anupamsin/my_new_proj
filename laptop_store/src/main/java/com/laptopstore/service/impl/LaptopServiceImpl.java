@@ -17,17 +17,17 @@ public class LaptopServiceImpl implements LaptopService {
     @Autowired
     private LaptopRepository laptopRepository;
 
-    private static LaptopDTO laptopToLaptopDTO(Laptop laptop){
-        LaptopDTO laptopDTO=new LaptopDTO();
-        BeanUtils.copyProperties(laptop,laptopDTO);
+    private static LaptopDTO laptopToLaptopDTO(Laptop laptop) {
+        LaptopDTO laptopDTO = new LaptopDTO();
+        BeanUtils.copyProperties(laptop, laptopDTO);
         return laptopDTO;
     }
 
     @Override
     public List<LaptopDTO> getAllLaptop() {
-        List<LaptopDTO> listLaptopDTO=new ArrayList<>();
-        laptopRepository.findAll().forEach(laptopData->listLaptopDTO.add(laptopToLaptopDTO(laptopData)));
-        if(listLaptopDTO.isEmpty()){
+        List<LaptopDTO> listLaptopDTO = new ArrayList<>();
+        laptopRepository.findAll().forEach(laptopData -> listLaptopDTO.add(laptopToLaptopDTO(laptopData)));
+        if (listLaptopDTO.isEmpty()) {
             throw new ResourceNotFoundException("No Laptop Data Found");
         }
         return listLaptopDTO;
@@ -35,7 +35,7 @@ public class LaptopServiceImpl implements LaptopService {
 
     @Override
     public LaptopDTO createALaptop(LaptopDTO laptopDTO) {
-        Laptop laptop=new Laptop();
+        Laptop laptop = new Laptop();
         laptop.setBrand(laptopDTO.getBrand());
         laptop.setName(laptopDTO.getName());
         laptop.setRam(laptopDTO.getRam());
@@ -48,14 +48,14 @@ public class LaptopServiceImpl implements LaptopService {
 
     @Override
     public LaptopDTO getLaptopDetails(Long id) {
-        Laptop laptop=laptopRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Laptop with ID : "+id+" not found"));
+        Laptop laptop = laptopRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Laptop with ID : " + id + " not found"));
         return laptopToLaptopDTO(laptop);
     }
 
     @Override
     public boolean deleteLaptop(Long id) {
-        Laptop laptop=laptopRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Laptop with ID : "+id+" not found"));
-        if(laptop!=null) {
+        Laptop laptop = laptopRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Laptop with ID : " + id + " not found"));
+        if (laptop != null) {
             laptopRepository.deleteById(id);
             return true;
         }
@@ -64,48 +64,54 @@ public class LaptopServiceImpl implements LaptopService {
 
     @Override
     public LaptopDTO updateLaptop(Long id, LaptopDTO laptopDTO) {
-        Laptop laptop=laptopRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Laptop with ID : "+id+" not found"));
-        if(laptop!=null) {
-            Laptop laptop1=new Laptop();
-            laptop1.setId(id);
-            laptop1.setBrand(laptopDTO.getBrand());
-            laptop1.setName(laptopDTO.getName());
-            laptop1.setRam(laptopDTO.getRam());
-            laptop1.setPrice(laptopDTO.getPrice());
-            laptop1.setProcessor(laptopDTO.getProcessor());
-            laptop1.setStorage(laptopDTO.getStorage());
-            laptopRepository.save(laptop1);
-            return laptopToLaptopDTO(laptop1);
-        }
-        return laptopToLaptopDTO(laptop);
+        Laptop laptop = laptopRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Laptop with ID : " + id + " not found"));
+        Laptop laptop1 = new Laptop();
+        laptop1.setId(id);
+        laptop1.setBrand(laptopDTO.getBrand());
+        laptop1.setName(laptopDTO.getName());
+        laptop1.setRam(laptopDTO.getRam());
+        laptop1.setPrice(laptopDTO.getPrice());
+        laptop1.setProcessor(laptopDTO.getProcessor());
+        laptop1.setStorage(laptopDTO.getStorage());
+        laptopRepository.save(laptop1);
+        return laptopToLaptopDTO(laptop1);
     }
 
     @Override
+    public List<LaptopDTO> search(String name, Double price, String brand) {
+        if (name != null) {
+            return searchByName(name);
+        } else if (price != null) {
+            return searchByPrice(price);
+        } else if (brand != null) {
+            return searchByBrand(brand);
+        }
+        throw new ResourceNotFoundException("No Data Found");
+    }
+
     public List<LaptopDTO> searchByName(String name) {
-        List<LaptopDTO> laptopDTOS=new ArrayList<>();
-        laptopRepository.findByName(name).forEach(laptopData->laptopDTOS.add(laptopToLaptopDTO(laptopData)));
-        if(laptopDTOS.isEmpty()){
-            throw new ResourceNotFoundException("No Data Found with Name : "+name);
+        List<LaptopDTO> laptopDTOS = new ArrayList<>();
+        laptopRepository.findByName(name).forEach(laptopData -> laptopDTOS.add(laptopToLaptopDTO(laptopData)));
+        if (laptopDTOS.isEmpty()) {
+            throw new ResourceNotFoundException("No Data Found with Name : " + name);
         }
         return laptopDTOS;
     }
 
-    @Override
     public List<LaptopDTO> searchByPrice(double price) {
-        List<LaptopDTO> laptopDTOS=new ArrayList<>();
-        laptopRepository.findByPrice(price).forEach(laptopData->laptopDTOS.add(laptopToLaptopDTO(laptopData)));
-        if(laptopDTOS.isEmpty()){
-            throw new ResourceNotFoundException("No Data Found with Price : "+price);
+        List<LaptopDTO> laptopDTOS = new ArrayList<>();
+        laptopRepository.findByPrice(price).forEach(laptopData -> laptopDTOS.add(laptopToLaptopDTO(laptopData)));
+        if (laptopDTOS.isEmpty()) {
+            throw new ResourceNotFoundException("No Data Found with Price : " + price);
         }
         return laptopDTOS;
     }
 
-    @Override
     public List<LaptopDTO> searchByBrand(String brand) {
-        List<LaptopDTO> laptopDTOS=new ArrayList<>();
-        laptopRepository.findByBrand(brand).forEach(laptopData->laptopDTOS.add(laptopToLaptopDTO(laptopData)));
-        if(laptopDTOS.isEmpty()){
-            throw new ResourceNotFoundException("No Data Found with Brand : "+brand);
+        List<LaptopDTO> laptopDTOS = new ArrayList<>();
+        laptopRepository.findByBrand(brand).forEach(laptopData -> laptopDTOS.add(laptopToLaptopDTO(laptopData)));
+        if (laptopDTOS.isEmpty()) {
+            throw new ResourceNotFoundException("No Data Found with Brand : " + brand);
         }
         return laptopDTOS;
     }

@@ -38,7 +38,7 @@ public class LaptopController {
 
     @DeleteMapping("/laptops/{id}")
     public ResponseEntity<String> deleteLaptopById(@PathVariable Long id) {
-        boolean status=laptopService.deleteLaptop(id);
+        laptopService.deleteLaptop(id);
         return new ResponseEntity<>("Product Deleted Successfully", HttpStatus.OK);
     }
 
@@ -52,14 +52,14 @@ public class LaptopController {
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "price", required = false) Double price,
             @RequestParam(name = "brand", required = false) String brand) {
-        List<LaptopDTO> laptops = null;
-        if (name != null) {
+        List<LaptopDTO> laptops = laptopService.search(name,price,brand);
+        /*if (name != null) {
             laptops = laptopService.searchByName(name);
         } else if (price != null) {
             laptops = laptopService.searchByPrice(price);
         } else if (brand != null) {
             laptops = laptopService.searchByBrand(brand);
-        }
+        }*/
 
         if (laptops != null && !laptops.isEmpty()) {
             return new ResponseEntity<>(laptops, HttpStatus.OK);
